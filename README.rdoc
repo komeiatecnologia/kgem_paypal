@@ -1,0 +1,12 @@
+##################### PARA CRIAR A ESTRUTURA DA GEM #####################
+mkdir -p kgem_paypal/{lib/k_paypal,test}
+
+##################### PARA EXECUTAR TESTE #####################
+rake test
+
+##################### PARA CRIAR O .GEM #####################
+gem build kgem_paypal.gemspec
+
+##################### RODAR GEM LOCAL #####################
+gem install kgem_paypal-0.0.1.gem --local
+depois inserir gem 'kgem_paypal' no arquivo Gemfile
