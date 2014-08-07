@@ -1,0 +1,47 @@
+module KPaypal
+	class GetExpressCheckout
+		include Extensions::MassAssignment
+
+		attr_accessor :token
+		attr_accessor :billing_agreement_accepted_status
+		attr_accessor :checkout_status
+		attr_accessor :time_stamp
+		attr_accessor :correlation_id
+		attr_accessor :ack
+		attr_accessor :build
+		attr_accessor :email
+		attr_accessor :payer_id
+		attr_accessor :payer_status
+		attr_accessor :first_name
+		attr_accessor :last_name
+		attr_accessor :tax_id
+		attr_accessor :tax_id_type
+		attr_accessor :currency_code
+		attr_accessor :amt
+		attr_accessor :item_amt
+		attr_accessor :shipping_amt
+		attr_accessor :handling_amt
+		attr_accessor :tax_amt
+		attr_accessor :inv_num
+		attr_accessor :insurance_amt
+		attr_accessor :ship_disc_amt
+		attr_accessor :payment_request_currency_code
+		attr_accessor :payment_request_amt
+		attr_accessor :payment_request_item_amt
+		attr_accessor :payment_request_shipping_amt
+		attr_accessor :payment_request_handling_amt
+		attr_accessor :payment_request_tax_amt
+		attr_accessor :payment_request_inv_num
+		attr_accessor :payment_request_insurance_amt
+		attr_accessor :payment_request_ship_disc_amt
+		attr_accessor :payment_request_address_normalization_status
+		attr_accessor :payment_request_error_code
+		attr_accessor :payment_request_ship_to_name
+    attr_accessor :payment_request_ship_to_street
+    attr_accessor :payment_request_ship_to_city
+    attr_accessor :payment_request_ship_to_state
+    attr_accessor :payment_request_ship_to_zip
+    attr_accessor :payment_request_ship_to_country_code
+    attr_accessor :payment_request_ship_to_country_name
+	end
+end

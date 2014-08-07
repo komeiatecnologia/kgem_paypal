@@ -1,0 +1,45 @@
+module KPaypal
+	class Ipn
+		include Extensions::MassAssignment
+
+		attr_accessor :residence_country
+		attr_accessor :invoice
+		attr_accessor :address_city
+		attr_accessor :first_name
+		attr_accessor :payer_id
+		attr_accessor :mc_fee
+		attr_accessor :txn_id
+		attr_accessor :receiver_email
+		attr_accessor :custom
+		attr_accessor :payment_date
+		attr_accessor :address_country_code
+		attr_accessor :address_zip
+		attr_accessor :item_name1
+		attr_accessor :mc_handling
+		attr_accessor :mc_handling1
+		attr_accessor :tax
+		attr_accessor :address_name
+		attr_accessor :last_name
+		attr_accessor :receiver_id
+		attr_accessor :verify_sign
+		attr_accessor :address_country
+		attr_accessor :payment_status
+		attr_accessor :address_status
+		attr_accessor :business
+		attr_accessor :payer_email
+		attr_accessor :notify_version
+		attr_accessor :txn_type
+		attr_accessor :test_ipn
+		attr_accessor :payer_status
+		attr_accessor :mc_currency
+		attr_accessor :mc_gross
+		attr_accessor :mc_shipping
+		attr_accessor :mc_shipping1
+		attr_accessor :item_number1
+		attr_accessor :quantity1
+		attr_accessor :address_state
+		attr_accessor :mc_gross1
+		attr_accessor :payment_type
+		attr_accessor :address_street
+	end
+end

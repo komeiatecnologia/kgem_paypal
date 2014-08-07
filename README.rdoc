@@ -10,3 +10,248 @@ gem build kgem_paypal.gemspec
 ##################### RODAR GEM LOCAL #####################
 gem install kgem_paypal-0.0.1.gem --local
 depois inserir gem 'kgem_paypal' no arquivo Gemfile
+
+##################### ATRIBUTOS #####################
+# PaymentRequest
+payment_request.order_id           #ID DO PEDIDO
+payment_request.total_amount       #VALOR TOTAL A PAGAR
+payment_request.total_amount_items #VALOR TOTAL DOS PRODUTOS
+payment_request.shipping_amount    #VALOR DO FRETE
+payment_request.return_url         #URL DE RETORNO
+payment_request.cancel_url         #URL DE CANCELAMENTO
+payment_request.payer_id           #IDENTIFICAÇÃO DO COMPRADOR
+payment_request.token              #CÓDIGO IDENTIFICADOR
+
+# Transaction
+transaction.token         #CÓDIGO IDENTIFICADOR
+transaction.payer_id      #IDENTIFICAÇÃO DO COMPRADOR
+transaction.ack           #STATUS DA COMUNICAÇÃO DA API
+transaction.error_code    #CÓDIGO DO ERRO
+transaction.short_message #MENSAGEM CURTA
+transaction.long_message  #MENSAGEM LONGA
+
+# SetExpressCheckout
+transaction.set_express_checkout.token          #CÓDIGO IDENTIFICADOR
+transaction.set_express_checkout.time_stamp     #HORA DO PROCESSAMENTO
+transaction.set_express_checkout.correlation_id #CÓDIGO PARA ANÁLISE DE ERROS
+transaction.set_express_checkout.ack            #STATUS DA COMUNICAÇÃO DA API
+transaction.set_express_checkout.build
+
+# GetExpressCheckout
+transaction.get_express_checkout.token                                        #CÓDIGO IDENTIFICADOR
+transaction.get_express_checkout.billing_agreement_accepted_status            
+transaction.get_express_checkout.checkout_status                              #STATUS DO CHECKOUT PAGO = PaymentActionCompleted
+transaction.get_express_checkout.time_stamp                                   #HORA DO PROCESSAMENTO
+transaction.get_express_checkout.correlation_id                               #CÓDIGO PARA ANÁLISE DE ERROS
+transaction.get_express_checkout.ack                                          #STATUS DA COMUNICAÇÃO DA API
+transaction.get_express_checkout.build
+transaction.get_express_checkout.email                                        #EMAIL DO COMPRADOR
+transaction.get_express_checkout.payer_id                                     #IDENTIFICAÇÃO DO COMPRADOR
+transaction.get_express_checkout.payer_status                                 #STATUS DO COMPRADOR
+transaction.get_express_checkout.first_name                                   #PRIMEIRO NOME DO COMPRADOR
+transaction.get_express_checkout.last_name                                    #ÚLTIMO NOME DO COMPRADOR
+transaction.get_express_checkout.tax_id                                       #NÚMERO IDENTIFICADOR DO IMPOSTO
+transaction.get_express_checkout.tax_id_type                                  #TIPO DO DOCUMENTO CPF/CNPJ
+transaction.get_express_checkout.currency_code                                #CÓDIGO DA MOEDA
+transaction.get_express_checkout.amt                                          #VALOR TOTAL A PAGAR
+transaction.get_express_checkout.item_amt                                     #VALOR TOTAL DOS PRODUTOS
+transaction.get_express_checkout.shipping_amt                                 #VALOR DO FRETE
+transaction.get_express_checkout.handling_amt
+transaction.get_express_checkout.tax_amt
+transaction.get_express_checkout.inv_num                                      #NÚMERO DO PEDIDO
+transaction.get_express_checkout.insurance_amt
+transaction.get_express_checkout.ship_disc_amt
+transaction.get_express_checkout.payment_request_currency_code
+transaction.get_express_checkout.payment_request_amt
+transaction.get_express_checkout.payment_request_item_amt
+transaction.get_express_checkout.payment_request_shipping_amt
+transaction.get_express_checkout.payment_request_handling_amt
+transaction.get_express_checkout.payment_request_tax_amt
+transaction.get_express_checkout.payment_request_inv_num
+transaction.get_express_checkout.payment_request_insurance_amt
+transaction.get_express_checkout.payment_request_ship_disc_amt
+transaction.get_express_checkout.payment_request_address_normalization_status
+transaction.get_express_checkout.payment_request_error_code
+transaction.get_express_checkout.payment_request_ship_to_name
+transaction.get_express_checkout.payment_request_ship_to_street
+transaction.get_express_checkout.payment_request_ship_to_city
+transaction.get_express_checkout.payment_request_ship_to_state
+transaction.get_express_checkout.payment_request_ship_to_zip
+transaction.get_express_checkout.payment_request_ship_to_country_code
+transaction.get_express_checkout.payment_request_ship_to_country_name
+
+# DoExpressCheckout
+transaction.do_express_checkout.token
+transaction.do_express_checkout.time_stamp
+transaction.do_express_checkout.correlation_id
+transaction.do_express_checkout.ack
+transaction.do_express_checkout.build
+transaction.do_express_checkout.payment_info_transaction_id
+transaction.do_express_checkout.payment_info_transaction_type
+transaction.do_express_checkout.payment_info_payment_type
+transaction.do_express_checkout.payment_info_order_time
+transaction.do_express_checkout.payment_info_amt
+transaction.do_express_checkout.payment_info_fee_amt
+transaction.do_express_checkout.payment_info_settle_amt
+transaction.do_express_checkout.payment_info_tax_amt
+transaction.do_express_checkout.payment_info_currency_code
+transaction.do_express_checkout.payment_info_exchange_rate
+transaction.do_express_checkout.payment_info_payment_status
+transaction.do_express_checkout.payment_info_pending_reason
+transaction.do_express_checkout.payment_info_reason_code
+transaction.do_express_checkout.payment_info_protection_elegibility
+transaction.do_express_checkout.payment_info_protection_elegibility_type
+transaction.do_express_checkout.payment_info_secure_merchant_account_id
+transaction.do_express_checkout.payment_info_error_code
+transaction.do_express_checkout.payment_info_ack
+
+# ATRIBUTOS IMPORTANTES
+transaction.do_express_checkout.payment_info_transaction_id
+transaction.do_express_checkout.payment_info_payment_status
+transaction.do_express_checkout.payment_info_pending_reason
+
+##################### TESTE #####################
+Reference: https://www.paypal-brasil.com.br/desenvolvedores/tutorial/tutorial-rapido-de-integracao-com-express-checkout/
+#### SetExpressCheckout ####
+KPaypal.test_configure
+KPaypal.by_items = true
+payment = KPaypal::PaymentRequest.new
+payment.order_id = 3
+payment.total_amount = 10
+payment.total_amount_items = 8
+payment.shipping_amount = 2
+payment.return_url = 'http://teste.com.br/return'
+payment.cancel_url = 'http://teste.com.br/cancel'
+payment.items << {
+  :name => 'Produto A',
+  :amount => 3
+}
+payment.items << {
+  :name => 'Produto B',
+  :amount => 5
+}
+transaction = payment.set_express_checkout
+puts
+puts transaction.set_express_checkout.ack
+case transaction.set_express_checkout.ack
+when 'Success'
+  puts transaction.set_express_checkout.token
+  puts transaction.set_express_checkout.time_stamp
+  puts transaction.set_express_checkout.correlation_id
+  puts transaction.set_express_checkout.build
+  puts payment.get_url(transaction.set_express_checkout.token) if transaction.set_express_checkout.ack == 'Success'
+when 'Failure'
+  puts transaction.errors.correlation_id
+  puts transaction.errors.time_stamp
+  puts transaction.errors.build
+  puts transaction.errors.l_error_code
+  puts transaction.errors.l_short_message
+  puts transaction.errors.l_long_message
+end
+
+##########################################
+#### GetExpressCheckoutDetails ####
+KPaypal.test_configure
+transaction = KPaypal::Transaction.new
+transaction.token = 'EC-7LB012893S780841P'
+transaction = transaction.get_express_checkout_details
+puts
+puts transaction.get_express_checkout.ack
+case transaction.get_express_checkout.ack
+when 'Success'
+  puts transaction.get_express_checkout.billing_agreement_accepted_status
+  puts transaction.get_express_checkout.checkout_status
+  puts transaction.get_express_checkout.correlation_id
+  puts transaction.get_express_checkout.payment_request_error_code
+when 'Failure'
+  puts transaction.errors.correlation_id
+  puts transaction.errors.time_stamp
+  puts transaction.errors.build
+  puts transaction.errors.l_error_code
+  puts transaction.errors.l_short_message
+  puts transaction.errors.l_long_message
+end
+
+##########################################
+#### DoExpressCheckoutPayment ####
+KPaypal.test_configure
+KPaypal.by_items = true
+payment = KPaypal::PaymentRequest.new
+payment.order_id = 3
+payment.total_amount = 10
+payment.total_amount_items = 8
+payment.shipping_amount = 2
+payment.items << {
+  :name => 'Produto A',
+  :amount => 3
+}
+payment.items << {
+  :name => 'Produto B',
+  :amount => 5
+}
+payment.token = 'EC-6D423737BT3791542'
+payment.payer_id = '5MQ9PAV43NEA2'
+transaction = payment.do_express_checkout_payment
+puts
+puts transaction.do_express_checkout.ack
+case transaction.do_express_checkout.ack
+when 'Success'
+  puts transaction.do_express_checkout.token
+  puts transaction.do_express_checkout.time_stamp
+  puts transaction.do_express_checkout.correlation_id
+  puts transaction.do_express_checkout.build
+  puts transaction.do_express_checkout.payment_info_transaction_id
+  puts transaction.do_express_checkout.payment_info_payment_type
+  puts transaction.do_express_checkout.payment_info_payment_status
+  puts transaction.do_express_checkout.payment_info_pending_reason
+  puts transaction.do_express_checkout.payment_info_reason_code
+  puts transaction.do_express_checkout.payment_info_error_code
+when 'Failure'
+  puts transaction.errors.correlation_id
+  puts transaction.errors.time_stamp
+  puts transaction.errors.build
+  puts transaction.errors.l_error_code
+  puts transaction.errors.l_short_message
+  puts transaction.errors.l_long_message
+end
+
+#### NOTIFICAÇÃO IPN ####
+ipn = 'residence_country=BR&invoice=abc1234&address_city=S%C3%A3o+Paulo&first_name=Fulano&payer_id=FULANO01&mc_fee=0.44&txn_id=892000279&receiver_email=empresa%40teste.com.br&custom=xyz123&payment_date=03%3A12%3A55+17+Dec+2013+PST&address_country_code=BR&address_zip=9513&item_name1=Produto&mc_handling=2.06&mc_handling1=1.67&tax=2.02&address_name=Fulano+de+Tal&last_name=de+Tal&receiver_id=ABC123TESTE&verify_sign=AFcWxV21C7fd0v3bYYYRCpSSRl31A4V7v9CCvz&address_country=Brazil&payment_status=Completed&address_status=confirmed&business=empresa%40teste.com.br&payer_email=fulano%40teste.com&notify_version=2.4&txn_type=cart&test_ipn=1&payer_status=verified&mc_currency=BRL&mc_gross=12.34&mc_shipping=3.02&mc_shipping1=1.02&item_number1=ID-Produto&quantity1=3&address_state=SP&mc_gross1=9.34&payment_type=instant&address_street=Rua+de+teste%2C+123'
+
+transaction = KPaypal::Transaction.new
+response = transaction.get_ipn_attributes(ipn) #RETORNA IPN OBJECT
+transaction.validate_ipn(ipn) #RETORNA TRUE OU FALSE NA VALIDAÇÃO DO IPN
+- Se retornar true então faça o processo de atualização de status.
+response.ipn.payment_status
+response.ipn.txn_id
+response.ipn.receiver_email
+response.ipn.mc_gross
+
+##########################################
+#### PROCESSOS IMPORTANTES ####
+#### GetExpressCheckoutDetails ####
+- Para verificação do status da transação, verifique o campo CHECKOUTSTATUS(transaction.get_express_checkout.checkout_status), onde existe os seguintes status:
+  - PaymentActionNotInitiated
+  - PaymentActionFailed
+  - PaymentActionInProgress
+  - PaymentActionCompleted
+
+#### DoExpressCheckoutPayment ####
+- A reposta do DoExpressCheckoutPayment vai retornar, entre outros campos, o PAYMENTINFO_n_TRANSACTIONID(transaction.do_express_checkout.payment_info_transaction_id). Esse campo deve ser armazenado em sua base de dados, para acompanhamento futuro. O campo que vai informar o estado da transação, é o campo PAYMENTINFO_n_PAYMENTSTATUS(transaction.do_express_checkout.payment_info_payment_status). Para conhecer os estados da transação e como tratá-los, veja nosso Guia de integração com Express Checkout.
+- Outros campos que você deve ficar atento, são PAYMENTINFO_n_PENDINGREASON(transaction.do_express_checkout.payment_info_pending_reason) e PAYMENTINFO_n_REASONCODE(transaction.do_express_checkout.payment_info_reason_code). Caso a transação não tenha sido aprovada ainda e tenha ido para revisão, esses dois campos irão informar sobre o motivo.
+
+#### IPN ####
+Processos do IPN:
+1. Um usuário clica em um botão de pagamento, ou sua aplicação faz uma chamada para uma operação da API, ou um evento externo ocorre, como um pagamento de recorrência, ou uma disputa;
+2. O serviço no notificações da PayPal envia um HTTP POST para sua aplicação, contendo uma mensagem IPN;
+3. Seu manipulador de notificações retorna um status HTTP 200 sem conteúdo;
+4. Seu manipulador de notificações faz um HTTP POST, na mesma ordem, com os mesmos campos e codificação recebidos, de volta para a PayPal;
+5. PayPal retorna uma string simples, contendo apenas VERIFIED, caso a mensagem seja válida, ou INVALID, caso a mensagem seja inválida;
+
+Para evitar fraudes e outros tipos de ataques, sua aplicação precisa necessariamente implementar o protocolo de autenticação como descrito nos passos 2, 3, 4 e 5 do diagrama acima. Caso não receba como resposta a string VERIFIED, sua aplicação deve descartar a notificação.
+
+Importante: Após verificar a autenticidade da notificação, tenha a certeza de efetuar os passos abaixo antes de entregar qualquer produto ou liberar qualquer conteúdo adquirido pelo cliente:
+- Verifique se o campo payment_status contém o valor Completed.
+- Se o valor do campo payment_status for Completed, verifique o valor do campo txn_id e veja se a transação já não foi processada pelo seu sistema.
+- Verifique se o email contido no campo receiver_email é o email da sua conta PayPal.
+- Verifique se o valor do pagamento enviado na notificação está correto. Se você estiver utilizando um botão de pagamento Website Payments Standard não criptografado, então é possível que alguém mal intencionado modifique o valor do pagamento, por exemplo, para um valor mais baixo, antes de fazer a postagem para a PayPal.
