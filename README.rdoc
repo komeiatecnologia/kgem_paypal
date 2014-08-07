@@ -8,7 +8,7 @@ rake test
 gem build kgem_paypal.gemspec
 
 ##################### RODAR GEM LOCAL #####################
-gem install kgem_paypal-0.0.1.gem --local
+gem install kgem_paypal-0.0.2.gem --local
 depois inserir gem 'kgem_paypal' no arquivo Gemfile
 
 ##################### ATRIBUTOS #####################
@@ -139,7 +139,7 @@ when 'Success'
   puts transaction.set_express_checkout.time_stamp
   puts transaction.set_express_checkout.correlation_id
   puts transaction.set_express_checkout.build
-  puts payment.get_url(transaction.set_express_checkout.token) if transaction.set_express_checkout.ack == 'Success'
+  puts transaction.get_url(transaction.set_express_checkout.token) if transaction.set_express_checkout.ack == 'Success'
 when 'Failure'
   puts transaction.errors.correlation_id
   puts transaction.errors.time_stamp

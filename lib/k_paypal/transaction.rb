@@ -27,6 +27,11 @@ module KPaypal
       :sandbox => 'https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_notify-validate?'
     }
 
+    ENDPOINT_TOKEN = {
+      :production => 'https://www.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=',
+      :sandbox => 'https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token='
+    }
+
     def address=(address)
       @address = ensure_type(Address, address)
     end
@@ -49,6 +54,10 @@ module KPaypal
 
     def ipn=(ipn)
       @ipn = ensure_type(Ipn, ipn)
+    end
+
+    def get_url(token)
+      "#{ENDPOINT_TOKEN[KPaypal.mode.to_sym]}#{token}"
     end
 
     #GetExpressCheckoutDetails

@@ -30,7 +30,7 @@ class PaymentRequestTest < Test::Unit::TestCase
   	assert_equal 'http://teste.com.br/cancel', payment.cancel_url, 'Should be http://teste.com.br/cancel'
   end
 
-  def test_set_express_checkout
+  def test_set_express_checkout_by_list
   	# KPaypal.test_configure
   	# KPaypal.by_items = true
   	# payment = KPaypal::PaymentRequest.new
@@ -57,7 +57,7 @@ class PaymentRequestTest < Test::Unit::TestCase
    #    puts transaction.set_express_checkout.time_stamp
    #    puts transaction.set_express_checkout.correlation_id
    #    puts transaction.set_express_checkout.build
-   #    puts payment.get_url(transaction.set_express_checkout.token) if transaction.set_express_checkout.ack == 'Success'
+   #    puts transaction.get_url(transaction.set_express_checkout.token) if transaction.set_express_checkout.ack == 'Success'
    #  when 'Failure'
    #    puts transaction.errors.correlation_id
    #    puts transaction.errors.time_stamp
@@ -66,6 +66,40 @@ class PaymentRequestTest < Test::Unit::TestCase
    #    puts transaction.errors.l_short_message
    #    puts transaction.errors.l_long_message
    #  end
+  end
+
+  def test_set_express_checkout_by_lote
+    # KPaypal.test_configure
+    # KPaypal.by_items = false
+    # payment = KPaypal::PaymentRequest.new
+    # payment.order_id = 5
+    # payment.total_amount = 5
+    # payment.total_amount_items = 3
+    # payment.shipping_amount = 2
+    # payment.return_url = 'http://teste.com.br/return'
+    # payment.cancel_url = 'http://teste.com.br/cancel'
+    # payment.items << {
+    #   :name => 'Produto A',
+    #   :amount => 3
+    # }
+    # transaction = payment.set_express_checkout
+    # puts
+    # puts transaction.set_express_checkout.ack
+    # case transaction.set_express_checkout.ack
+    # when 'Success'
+    #   puts transaction.set_express_checkout.token
+    #   puts transaction.set_express_checkout.time_stamp
+    #   puts transaction.set_express_checkout.correlation_id
+    #   puts transaction.set_express_checkout.build
+    #   puts payment.get_url(transaction.set_express_checkout.token) if transaction.set_express_checkout.ack == 'Success'
+    # when 'Failure'
+    #   puts transaction.errors.correlation_id
+    #   puts transaction.errors.time_stamp
+    #   puts transaction.errors.build
+    #   puts transaction.errors.l_error_code
+    #   puts transaction.errors.l_short_message
+    #   puts transaction.errors.l_long_message
+    # end
   end
 
   def test_do_express_checkout_payment

@@ -21,11 +21,6 @@ module KPaypal
 	    :sandbox => 'https://api-3t.sandbox.paypal.com/nvp?'
 	  }
 
-	  ENDPOINT_TOKEN = {
-	  	:production => 'https://www.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=',
-	  	:sandbox => 'https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token='
-	  }
-
 	  def items
       @items ||= Items.new
     end
@@ -47,10 +42,6 @@ module KPaypal
 	  	self.method = 'DoExpressCheckoutPayment'
 	  	hash = connect_http_request(to_query(self.generate_params))
 	  	Transaction.new(Transaction::Serializer.new(hash).serialize)
-	  end
-
-	  def get_url(token)
-	  	"#{ENDPOINT_TOKEN[KPaypal.mode.to_sym]}#{token}"
 	  end
 
 	  private
