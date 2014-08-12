@@ -56,10 +56,6 @@ module KPaypal
       @ipn = ensure_type(Ipn, ipn)
     end
 
-    def get_url(token)
-      "#{ENDPOINT_TOKEN[KPaypal.mode.to_sym]}#{token}"
-    end
-
     #GetExpressCheckoutDetails
     def get_express_checkout_details
       hash = {
@@ -82,6 +78,10 @@ module KPaypal
     def validate_ipn(ipn)
       response = connect_http_request_ipn(ipn)
       response && response == 'VERIFIED' ? true : false
+    end
+
+    def get_url(token)
+      "#{ENDPOINT_TOKEN[KPaypal.mode.to_sym]}#{token}"
     end
 
     private

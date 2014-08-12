@@ -34,7 +34,7 @@ class PaymentRequestTest < Test::Unit::TestCase
   	# KPaypal.test_configure
   	# KPaypal.by_items = true
   	# payment = KPaypal::PaymentRequest.new
-  	# payment.order_id = 4
+  	# payment.order_id = 5
   	# payment.total_amount = 10
   	# payment.total_amount_items = 8
   	# payment.shipping_amount = 2
