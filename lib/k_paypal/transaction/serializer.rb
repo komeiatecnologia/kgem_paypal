@@ -47,7 +47,7 @@ module KPaypal
           :correlation_id => hash[:CORRELATIONID],
           :ack => hash[:ACK],
           :build => hash[:BUILD],
-          :time_stamp => Time.parse(hash[:TIMESTAMP])
+          :time_stamp => Time.parse(hash[:TIMESTAMP].to_s)
         }
       end
 
@@ -56,7 +56,7 @@ module KPaypal
           :token => hash[:TOKEN],
           :billing_agreement_accepted_status => hash[:BILLINGAGREEMENTACCEPTEDSTATUS],
           :checkout_status => hash[:CHECKOUTSTATUS],
-          :time_stamp => Time.parse(hash[:TIMESTAMP]),
+          :time_stamp => Time.parse(hash[:TIMESTAMP].to_s),
           :correlation_id => hash[:CORRELATIONID],
           :ack => hash[:ACK],
           :build => hash[:BUILD],
@@ -100,7 +100,7 @@ module KPaypal
       def serialize_do_express_checkout(data)
         data[:do_express_checkout] = {
           :token => hash[:TOKEN],
-          :time_stamp => Time.parse(hash[:TIMESTAMP]),
+          :time_stamp => Time.parse(hash[:TIMESTAMP].to_s),
           :correlation_id => hash[:CORRELATIONID],
           :ack => hash[:ACK],
           :build => hash[:BUILD],
@@ -191,7 +191,7 @@ module KPaypal
           :payer_status => hash[:PAYERSTATUS],
           :country_code => hash[:COUNTRYCODE],
           :business => hash[:BUSINESS],
-          :time_stamp => Time.parse(hash[:TIMESTAMP]),
+          :time_stamp => Time.parse(hash[:TIMESTAMP].to_s),
           :correlation_id => hash[:CORRELATIONID],
           :ack => hash[:ACK],
           :first_name => hash[:FIRSTNAME],
