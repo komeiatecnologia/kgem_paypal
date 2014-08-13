@@ -86,12 +86,6 @@ module KPaypal
       "#{ENDPOINT_TOKEN[KPaypal.mode.to_sym]}#{token}"
     end
 
-    def teste(ipn)
-      ipn.delete(:controller)
-      ipn.delete(:action)
-      to_query(ipn)
-    end
-
     private
     def connect_http_request(params)
       uri = URI.parse(ENDPOINT[KPaypal.mode.to_sym])
