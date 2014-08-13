@@ -16,6 +16,7 @@ module KPaypal
           serialize_do_express_checkout(data)
           serialize_errors(data)
           serialize_ipn(data)
+          serialize_get_transaction(data)
 
           data.delete_if {|key, value| value.nil? }
         end
@@ -127,7 +128,7 @@ module KPaypal
       def serialize_errors(data)
         data[:errors] = {
           :correlation_id => hash[:CORRELATIONID],
-          :time_stamp => Time.parse(hash[:TIMESTAMP]),
+          :time_stamp => Time.parse(hash[:TIMESTAMP].to_s),
           :ack => hash[:ACK],
           :build => hash[:BUILD],
           :l_error_code => hash[:L_ERRORCODE0],
@@ -177,6 +178,37 @@ module KPaypal
           :mc_gross1 => hash[:mc_gross1],
           :payment_type => hash[:payment_type],
           :address_street => hash[:address_street]
+        }
+      end
+
+      def serialize_get_transaction(data)
+        data[:get_transaction] = {
+          :receiver_business => hash[:RECEIVERBUSINESS],
+          :receiver_email => hash[:RECEIVEREMAIL],
+          :receiver_id => hash[:RECEIVERID],
+          :email => hash[:EMAIL],
+          :payer_id => hash[:PAYERID],
+          :payer_status => hash[:PAYERSTATUS],
+          :country_code => hash[:COUNTRYCODE],
+          :business => hash[:BUSINESS],
+          :time_stamp => Time.parse(hash[:TIMESTAMP]),
+          :correlation_id => hash[:CORRELATIONID],
+          :ack => hash[:ACK],
+          :first_name => hash[:FIRSTNAME],
+          :last_name => hash[:LASTNAME],
+          :transaction_id => hash[:TRANSACTIONID],
+          :transaction_type => hash[:TRANSACTIONTYPE],
+          :payment_type => hash[:PAYMENTTYPE],
+          :order_time => Time.parse(hash[:ORDERTIME].to_s),
+          :amt => BigDecimal(hash[:AMT].to_s),
+          :currency_code => hash[:CURRENCYCODE],
+          :payment_status => hash[:PAYMENTSTATUS],
+          :pending_reason => hash[:PENDINGREASON],
+          :reason_code => hash[:REASONCODE],
+          :protection_eligibility => hash[:PROTECTIONELIGIBILITY],
+          :protection_eligibitity_type => hash[:PROTECTIONELIGIBILITYTYPE],
+          :l_currency_code => hash[:L_CURRENCYCODE0],
+          :l_taxable => hash[:L_TAXABLE0]
         }
       end
     end

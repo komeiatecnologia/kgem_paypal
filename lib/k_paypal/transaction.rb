@@ -9,6 +9,7 @@ module KPaypal
     attr_accessor :error_code
     attr_accessor :short_message
     attr_accessor :long_message
+    attr_accessor :transaction_id
 
     attr_reader :address
     attr_reader :set_express_checkout
@@ -16,6 +17,7 @@ module KPaypal
     attr_reader :do_express_checkout
     attr_reader :errors
     attr_reader :ipn
+    attr_reader :get_transaction
 
     ENDPOINT = {
       :production => 'https://api-3t.paypal.com/nvp?',
@@ -48,6 +50,10 @@ module KPaypal
       @do_express_checkout = ensure_type(DoExpressCheckout, do_express_checkout)
     end
 
+    def get_transaction=(get_transaction)
+      @get_transaction = ensure_type(GetTransaction, get_transaction)
+    end
+
     def errors=(errors)
       @errors = ensure_type(Errors, errors)
     end
@@ -65,6 +71,20 @@ module KPaypal
         :VERSION => KPaypal.version,
         :METHOD => 'GetExpressCheckoutDetails',
         :TOKEN => self.token
+      }
+      hash = connect_http_request(to_query(hash))
+      Transaction.new(Serializer.new(hash).serialize)
+    end
+
+    #GetTransactionDetails
+    def get_transaction_details
+      hash = {
+        :USER => KPaypal.user,
+        :PWD => KPaypal.pwd,
+        :SIGNATURE => KPaypal.signature,
+        :VERSION => KPaypal.version,
+        :METHOD => 'GetTransactionDetails',
+        :TRANSACTIONID => self.transaction_id
       }
       hash = connect_http_request(to_query(hash))
       Transaction.new(Serializer.new(hash).serialize)

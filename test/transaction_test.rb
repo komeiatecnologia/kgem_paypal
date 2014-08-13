@@ -31,6 +31,12 @@ class TransactionTest < Test::Unit::TestCase
     assert_instance_of KPaypal::DoExpressCheckout, transaction.do_express_checkout, 'Should return do_express_checkout object in transaction object'
   end
 
+  def test_get_transaction_details_object
+    transaction = KPaypal::Transaction.new
+    transaction.get_transaction = {:transaction_id => 12345678}
+    assert_instance_of KPaypal::GetTransaction, transaction.get_transaction, 'Should return get_transaction object in transaction'
+  end
+
   def test_errors_object
     transaction = KPaypal::Transaction.new
     transaction.errors = {:ack => 'Failure'}
@@ -71,5 +77,49 @@ class TransactionTest < Test::Unit::TestCase
    #    puts transaction.errors.l_short_message
    #    puts transaction.errors.l_long_message
    #  end
+  end
+
+  def test_get_transaction_details
+    # KPaypal.test_configure
+    # transaction = KPaypal::Transaction.new
+    # transaction.transaction_id = "9XA27794CB0274335"
+    # transaction = transaction.get_transaction_details
+    # case transaction.get_transaction.ack
+    # when 'Success'
+    #   puts
+    #   puts transaction.get_transaction.receiver_business
+    #   puts transaction.get_transaction.receiver_email
+    #   puts transaction.get_transaction.receiver_id
+    #   puts transaction.get_transaction.email
+    #   puts transaction.get_transaction.payer_id
+    #   puts transaction.get_transaction.payer_status
+    #   puts transaction.get_transaction.country_code
+    #   puts transaction.get_transaction.business
+    #   puts transaction.get_transaction.time_stamp
+    #   puts transaction.get_transaction.correlation_id
+    #   puts transaction.get_transaction.ack
+    #   puts transaction.get_transaction.first_name
+    #   puts transaction.get_transaction.last_name
+    #   puts transaction.get_transaction.transaction_id
+    #   puts transaction.get_transaction.transaction_type
+    #   puts transaction.get_transaction.payment_type
+    #   puts transaction.get_transaction.order_time
+    #   puts transaction.get_transaction.amt
+    #   puts transaction.get_transaction.currency_code
+    #   puts transaction.get_transaction.payment_status
+    #   puts transaction.get_transaction.pending_reason
+    #   puts transaction.get_transaction.reason_code
+    #   puts transaction.get_transaction.protection_eligibility
+    #   puts transaction.get_transaction.protection_eligibitity_type
+    #   puts transaction.get_transaction.l_currency_code
+    #   puts transaction.get_transaction.l_taxable
+    # when 'Failure'
+    #   puts transaction.errors.correlation_id
+    #   puts transaction.errors.time_stamp
+    #   puts transaction.errors.build
+    #   puts transaction.errors.l_error_code
+    #   puts transaction.errors.l_short_message
+    #   puts transaction.errors.l_long_message
+    # end
   end
 end
