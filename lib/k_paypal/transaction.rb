@@ -122,7 +122,7 @@ module KPaypal
     def to_query(hash)
       p = []
       hash.each do |k,v|
-        p << "#{k}=#{v}"
+        p << "#{k}=#{CGI::escape(v.to_s)}"
       end
       p.join "&"
     end

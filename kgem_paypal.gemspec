@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
 	s.name 				  = 'kgem_paypal'
-	s.version 		  = '0.0.4'
+	s.version 		  = '0.0.5'
 	s.summary 		  = 'Paypal Express Integration'
 	s.description   = 'Paypal API Integration'
 	s.author 			  = 'Komeia Interativa'
@@ -9,11 +9,8 @@ Gem::Specification.new do |s|
 	s.platform              = Gem::Platform::RUBY
   s.required_ruby_version = Gem::Requirement.new(">= 1.8.7")
 	s.files 			  = Dir["{lib/**/*.rb,README.rdoc,test/**/*.rb,Rakefile,*.gemspec}"]
-	s.add_dependency "activesupport", "~> 2.3.8"
 	s.require_paths   = ['lib']
 	s.post_install_message = "    **************************************************\n
-Para funcionar corretamente, esta GEM depende do activesupport 2.3.8 ou superior\n    
-
 Rails 2.3.8\n
 Tabela para armazenar informações das transações PayPal\n
 Criar relação 1..n na tabela Order para PaypalLog\n
