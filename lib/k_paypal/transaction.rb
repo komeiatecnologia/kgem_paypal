@@ -94,7 +94,6 @@ module KPaypal
       request = Net::HTTP::Post.new(uri.request_uri)
       request.body = params
       response = http.request(request)
-      puts response.body
       response = convert_to_hash(response.body)
       return response
     end
@@ -106,9 +105,8 @@ module KPaypal
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
       request = Net::HTTP::Post.new(uri.request_uri)
-      request.body = params
+      request.body = to_query(params)
       response = http.request(request)
-      puts response.body
       return response.body
     end
 
