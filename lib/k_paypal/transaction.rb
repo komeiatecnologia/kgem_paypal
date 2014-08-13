@@ -91,8 +91,7 @@ module KPaypal
     end
 
     def get_ipn_attributes(ipn)
-      hash = convert_to_hash(ipn)
-      Transaction.new(Serializer.new(hash).serialize)
+      Transaction.new(Serializer.new(ipn).serialize)
     end
 
     def validate_ipn(ipn)
