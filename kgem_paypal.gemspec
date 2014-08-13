@@ -9,7 +9,12 @@ Gem::Specification.new do |s|
 	s.platform              = Gem::Platform::RUBY
   s.required_ruby_version = Gem::Requirement.new(">= 1.8.7")
 	s.files 			  = Dir["{lib/**/*.rb,README.rdoc,test/**/*.rb,Rakefile,*.gemspec}"]
-	s.post_install_message = "    **************************************************\n    Rails 2.3.8\n
+	s.add_dependency "activesupport", "~> 2.3.8"
+	s.require_paths   = ['lib']
+	s.post_install_message = "    **************************************************\n
+Para funcionar corretamente, esta GEM depende do activesupport 2.3.8 ou superior\n    
+
+Rails 2.3.8\n
 Tabela para armazenar informações das transações PayPal\n
 Criar relação 1..n na tabela Order para PaypalLog\n
 script/generate model paypal_log order:references token:string correlation_id:string checkout_status:string payer_id:string transaction_id:string payment_status:string pending_reason:string\n\n

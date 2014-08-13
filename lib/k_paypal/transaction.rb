@@ -76,12 +76,20 @@ module KPaypal
     end
 
     def validate_ipn(ipn)
-      response = connect_http_request_ipn(ipn)
+      ipn.delete(:controller)
+      ipn.delete(:action)
+      response = connect_http_request_ipn(to_query(ipn))
       response && response == 'VERIFIED' ? true : false
     end
 
     def get_url(token)
       "#{ENDPOINT_TOKEN[KPaypal.mode.to_sym]}#{token}"
+    end
+
+    def teste(ipn)
+      ipn.delete(:controller)
+      ipn.delete(:action)
+      to_query(ipn)
     end
 
     private
@@ -105,7 +113,7 @@ module KPaypal
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
       request = Net::HTTP::Post.new(uri.request_uri)
-      request.body = to_query_params(params)
+      request.body = params
       response = http.request(request)
       return response.body
     end
@@ -123,12 +131,6 @@ module KPaypal
         p << "#{k}=#{v}"
       end
       p.join "&"
-    end
-
-    def to_query_params(params)
-      params.delete(:controller)
-      params.delete(:action)
-      params.collect { |k,v| "#{k}=#{CGI::escape(v.to_s)}" }.join('&')
     end
   end
 end

@@ -5,6 +5,8 @@ require 'bigdecimal'
 require 'forwardable'
 require 'time'
 require 'cgi'
+require 'active_support'
+require 'active_support/all'
 
 require 'k_paypal/extensions/ensure_type'
 require 'k_paypal/extensions/mass_assignment'
