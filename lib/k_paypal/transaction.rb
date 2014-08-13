@@ -105,7 +105,7 @@ module KPaypal
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
       request = Net::HTTP::Post.new(uri.request_uri)
-      request.body = to_query(params)
+      request.body = to_query_params(params)
       response = http.request(request)
       return response.body
     end
@@ -123,6 +123,12 @@ module KPaypal
         p << "#{k}=#{v}"
       end
       p.join "&"
+    end
+
+    def to_query_params(params)
+      params.delete(:controller)
+      params.delete(:action)
+      params.collect { |k,v| "#{k}=#{CGI::escape(v.to_s)}" }.join('&')
     end
   end
 end
