@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
 	s.name 				  = 'kgem_paypal'
-	s.version 		  = '0.0.2'
+	s.version 		  = '0.0.3'
 	s.summary 		  = 'Paypal Express Integration'
 	s.description   = 'Paypal API Integration'
 	s.author 			  = 'Komeia Interativa'
