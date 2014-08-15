@@ -215,6 +215,50 @@ when 'Failure'
   puts transaction.errors.l_long_message
 end
 
+##########################################
+#### GetTransaction ####
+KPaypal.test_configure
+transaction = KPaypal::Transaction.new
+transaction.transaction_id = "9XA27794CB0274335"
+transaction = transaction.get_transaction_details
+case transaction.get_transaction.ack
+when 'Success'
+  puts
+  puts transaction.get_transaction.receiver_business
+  puts transaction.get_transaction.receiver_email
+  puts transaction.get_transaction.receiver_id
+  puts transaction.get_transaction.email
+  puts transaction.get_transaction.payer_id
+  puts transaction.get_transaction.payer_status
+  puts transaction.get_transaction.country_code
+  puts transaction.get_transaction.business
+  puts transaction.get_transaction.time_stamp
+  puts transaction.get_transaction.correlation_id
+  puts transaction.get_transaction.ack
+  puts transaction.get_transaction.first_name
+  puts transaction.get_transaction.last_name
+  puts transaction.get_transaction.transaction_id
+  puts transaction.get_transaction.transaction_type
+  puts transaction.get_transaction.payment_type
+  puts transaction.get_transaction.order_time
+  puts transaction.get_transaction.amt
+  puts transaction.get_transaction.currency_code
+  puts transaction.get_transaction.payment_status
+  puts transaction.get_transaction.pending_reason
+  puts transaction.get_transaction.reason_code
+  puts transaction.get_transaction.protection_eligibility
+  puts transaction.get_transaction.protection_eligibitity_type
+  puts transaction.get_transaction.l_currency_code
+  puts transaction.get_transaction.l_taxable
+when 'Failure'
+  puts transaction.errors.correlation_id
+  puts transaction.errors.time_stamp
+  puts transaction.errors.build
+  puts transaction.errors.l_error_code
+  puts transaction.errors.l_short_message
+  puts transaction.errors.l_long_message
+end
+
 #### NOTIFICAÇÃO IPN ####
 ipn = 'residence_country=BR&invoice=abc1234&address_city=S%C3%A3o+Paulo&first_name=Fulano&payer_id=FULANO01&mc_fee=0.44&txn_id=892000279&receiver_email=empresa%40teste.com.br&custom=xyz123&payment_date=03%3A12%3A55+17+Dec+2013+PST&address_country_code=BR&address_zip=9513&item_name1=Produto&mc_handling=2.06&mc_handling1=1.67&tax=2.02&address_name=Fulano+de+Tal&last_name=de+Tal&receiver_id=ABC123TESTE&verify_sign=AFcWxV21C7fd0v3bYYYRCpSSRl31A4V7v9CCvz&address_country=Brazil&payment_status=Completed&address_status=confirmed&business=empresa%40teste.com.br&payer_email=fulano%40teste.com&notify_version=2.4&txn_type=cart&test_ipn=1&payer_status=verified&mc_currency=BRL&mc_gross=12.34&mc_shipping=3.02&mc_shipping1=1.02&item_number1=ID-Produto&quantity1=3&address_state=SP&mc_gross1=9.34&payment_type=instant&address_street=Rua+de+teste%2C+123'
 

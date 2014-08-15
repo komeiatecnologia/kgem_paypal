@@ -82,7 +82,7 @@ class TransactionTest < Test::Unit::TestCase
   def test_get_transaction_details
     # KPaypal.test_configure
     # transaction = KPaypal::Transaction.new
-    # transaction.transaction_id = "9XA27794CB0274335"
+    # transaction.transaction_id = "8F843561UT337535C"
     # transaction = transaction.get_transaction_details
     # case transaction.get_transaction.ack
     # when 'Success'

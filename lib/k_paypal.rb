@@ -20,7 +20,7 @@ require 'k_paypal/get_express_checkout'
 require 'k_paypal/do_express_checkout'
 require 'k_paypal/errors'
 require 'k_paypal/ipn'
-require 'k_paypal/get_transaction_details'
+require 'k_paypal/get_transaction'
 
 module KPaypal
 	class << self
