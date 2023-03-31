@@ -48,7 +48,7 @@ module KPaypal
 	  def connect_http_request(params)
 	    uri = URI.parse(ENDPOINT[KPaypal.mode.to_sym])
 	    http = Net::HTTP.new(uri.host, uri.port)
-	    http.read_timeout = 0
+	    http.read_timeout = 20
 	    http.use_ssl = true
 	    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 	    request = Net::HTTP::Post.new(uri.request_uri)
